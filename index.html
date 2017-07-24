@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='jquery.qtip.min.css' rel='stylesheet' />
+<link href='fullcalendar.min.css' rel='stylesheet' />
+<link href='fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='lib/moment.min.js'></script>
+<script src='lib/jquery.min.js'></script>
+<script src='jquery.qtip.min.js'></script>
+<script src='fullcalendar.min.js'></script>
+<script>
+
+	$(document).ready(function() {
+		
+
+				
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay,listWeek'
+			},
+			defaultDate: '2017-08-16',
+			defaultView: 'agendaWeek',
+			allDaySlot: false, // all day slot displayed at top
+			firstDay: 2,
+			navLinks: true, // can click day/week names to navigate views
+			editable: false,
+			eventLimit: true, // allow "more" link when too many events
+			slotEventOverlap: false,
+			eventTextColor: 'black',			
+			events: [				
+				{title: 'The Creature from Wakulla Springs!',location: 'JW :: 201 :: 6',users: 'Joe,Helen,Charles,Amanda,Nathan,Marlena',start: '2017-08-17T11:00:00',end: '0', link: 'https://www.gencon.com/events/122648', backgroundColor: '#8DB6C7'},{title: 'The Stone Tree Incident',location: 'JW :: 313 :: 1',users: 'Joe,Helen,Charles,Jeff',start: '2017-08-17T15:00:00',end: '2017-08-17T19:00:00', link: 'https://www.gencon.com/events/111587', backgroundColor: '#8DB6C7'},{title: 'Pandemic',location: 'ICC :: Hall D : Rogue Judges :: HQ',users: 'Joe,Helen,Charles,Marlena,Joshua,Jeff',start: '2017-08-18T10:00:00',end: '2017-08-18T12:00:00', link: 'https://www.gencon.com/events/106362', backgroundColor: '#C1B38E'},{title: 'Power',location: 'JW :: 313 :: 3',users: 'Joe,Helen,Charles,Marlena,Joshua,Jeff',start: '2017-08-18T14:00:00',end: '2017-08-18T18:00:00', link: 'https://www.gencon.com/events/112938', backgroundColor: '#8DB6C7'},{title: '4 the Birds',location: 'ICC :: Hall D : Breaking :: HQ',users: 'Joe,Helen,Charles,Amanda,Nathan,Marlena,generic,Joshua',start: '2017-08-19T10:00:00',end: '2017-08-19T12:00:00', link: 'https://www.gencon.com/events/114104', backgroundColor: '#C1B38E'},{title: 'Mammoth Star Trek Catan: Federation Space',location: 'ICC :: Hall E : Catan Studios :: HQ',users: 'Joe',start: '2017-08-20T10:00:00',end: '2017-08-20T12:00:00', link: 'https://www.gencon.com/events/110066', backgroundColor: '#C1B38E'},{title: 'The Sword of Zaldor: A Fantasy Escape Room',location: 'ICC :: 120',users: 'Charles,Amanda,Nathan,Marlena,Joshua',start: '2017-08-17T09:00:00',end: '2017-08-17T10:00:00', link: 'https://www.gencon.com/events/106579', backgroundColor: '#B2E289'},{title: 'The Board is Turned',location: 'Crowne Plaza :: Illinois St Blrm West',users: 'Charles,Marlena,generic,Joshua',start: '2017-08-18T19:00:00',end: '2017-08-19T01:00:00', link: 'https://www.gencon.com/events/106590', backgroundColor: '#CA9F92'},{title: 'A Climax of Painful Secrets',location: 'JW :: White River Blrm H :: 5',users: 'Charles,Marlena,Joshua,Jeff',start: '2017-08-19T19:00:00',end: '2017-08-19T23:00:00', link: 'https://www.gencon.com/events/123009', backgroundColor: '#8DB6C7'},{title: 'Promised Sands: Dry Denizen Explorers',location: 'JW :: 313 :: 3',users: 'Amanda,Nathan,Marlena,Joshua',start: '2017-08-17T15:00:00',end: '2017-08-17T19:00:00', link: 'https://www.gencon.com/events/110880', backgroundColor: '#8DB6C7'},{title: 'Lockdown',location: 'Omni :: Fisher Blrm',users: 'Marlena',start: '2017-08-17T19:00:00',end: '2017-08-17T23:00:00', link: 'https://www.gencon.com/events/103593', backgroundColor: '#CA9F92'},{title: 'Past is Prologue',location: 'Crowne Plaza :: Illinois St Blrm West',users: 'Marlena',start: '2017-08-19T12:00:00',end: '2017-08-19T18:00:00', link: 'https://www.gencon.com/events/106591', backgroundColor: '#CA9F92'},{title: 'UH.AQ.12.02 Araqunidia Cameo: Knight in Centropolis',location: 'Union Station :: Edison North :: 8--9',users: 'Joshua',start: '2017-08-16T19:00:00',end: '2017-08-16T23:00:00', link: 'https://www.gencon.com/events/104454', backgroundColor: '#8DB6C7'},{title: 'Scions of Atlantis',location: 'Lucas Oil :: Field : Contessa :: HQ',users: 'Joshua',start: '2017-08-17T10:00:00',end: '2017-08-17T12:00:00', link: 'https://www.gencon.com/events/112666', backgroundColor: '#8DB6C7'},{title: 'Another Night at the Bloody Buckets: Tournament of Champions',location: '::',users: 'Joshua,Jeff',start: '2017-08-17T20:00:00',end: '2017-08-18T00:00:00', link: 'https://www.gencon.com/events/104406', backgroundColor: '#8DB6C7'}
+			],
+			eventRender: function(event, eventElement, view) {
+				if (event.users) {
+					var userImages = event.users.split(",");
+					if (view.name == "listWeek") { eventElement.find("td.fc-list-item-title").append("&emsp;"); }
+					for (var img = userImages.length-1; img >= 0 ; img--) {
+						if (view.name == "agendaWeek" || view.name == "agendaDay") { eventElement.find("div.fc-content").prepend("<img src='img/" + userImages[img] + ".jpg' alt='" + userImages[img] + "' style='border-radius: 50%' width='16' height='16'>"); }
+						if (view.name == "listWeek") { eventElement.find("td.fc-list-item-title").append("<img src='img/" + userImages[img] + ".jpg' alt='" + userImages[img] + "' style='vertical-align: middle; border-radius: 50%' width='16' height='16'>&nbsp;"); }						
+					}
+				}
+				//if (event.location) { eventElement.find('.fc-title').append("<br/><i>" + event.location) + "</i>"; }
+				eventElement.find('.fc-time').hide();
+				eventElement.qtip({
+					content: {
+						title: event.title,
+						text: "<p><b>Location:</b> " + event.location + "<br /><b>Start Time:</b> " + moment(event.start).format("h:mm A") + "<br /><b>End Time:</b> " + moment(event.end).format("h:mm A") + "<br /><b>Who's Attending:</b> " + event.users.replace(/,/g, ", ") + "</p><p><a href='" + event.link + "'>Full Event Info</a></p>"
+					},
+					show: {
+						delay: 500
+					},
+					hide: {
+						fixed: true
+					},
+					position: {
+						target: 'mouse',
+						adjust: {
+							mouse: false
+						}
+					},
+					style: {
+						classes: 'qtip-bootstrap'
+					}
+				});
+			}			
+		});
+		
+	});
+
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+</head>
+<body>
+
+	<div id='calendar'></div>
+
+</body>
+</html>
