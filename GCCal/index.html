@@ -11,15 +11,57 @@
 <script src='fullcalendar.min.js'></script>
 <script>
 
-	$(document).ready(function() {
-		
+	// Alert/Confirm/Prompt
+	function dialogue(content, title) {
+		$('<div />').qtip({
+			content: {
+				text: content,
+				title: title
+			},
+			position: {
+				my: 'center', at: 'center',
+				target: $(window)
+			},
+			show: {
+				ready: true,
+				modal: {
+					on: true,
+					blur: false
+				}
+			},
+			hide: false,
+			style: {
+				classes: 'qtip-bootstrap'
+			},
+			events: {
+				render: function(event, api) {
+					$('button', api.elements.content).click(function(e) {
+						api.hide(e);
+					});
+				},
+				hide: function(event, api) { api.destroy(); }
+			}
+		});
+	}
 
+	$(document).ready(function() {
 				
 		$('#calendar').fullCalendar({
+			customButtons: {
+				showPayments: {
+					text: 'show payments',
+					click: function() {
+						var message = $('<table style="padding-top:10px; padding-bottom:20px; width:200px"><thead><tr><th><th style="width:10%"></tr></thead><tbody><tr><th scope="row">Helen pays Joe</th><td>$10</td></tr><tr><th scope="row">Helen pays Marlena</th><td>$6</td></tr><tr><th scope="row">Charles pays Joe</th><td>$10</td></tr><tr><th scope="row">Charles pays Marlena</th><td>$52</td></tr><tr><th scope="row">Amanda pays Marlena</th><td>$38</td></tr><tr><th scope="row">Nathan pays Marlena</th><td>$38</td></tr><tr><th scope="row">Joshua pays Joe</th><td>$6</td></tr><tr><th scope="row">Joshua pays Marlena</th><td>$42</td></tr><tr><th scope="row">Jeff pays Joe</th><td>$10</td></tr><tr><th scope="row">Jeff pays Marlena</th><td>$8</td></tr><tr><th scope="row">Jeff pays Joshua</th><td>$4</td></tr></tbody></table>'), 
+						ok = $('<button />', { text: 'Ok' });
+
+						dialogue( message.add(ok), 'Payment Details' );
+					}
+				}
+			},
 			header: {
 				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay,listWeek'
+				center: 'month,agendaWeek,agendaDay,listWeek showPayments',
+				right: 'title'
 			},
 			contentHeight: 'auto',
 			defaultDate: '2017-08-16',
@@ -85,7 +127,7 @@
 		max-width: 900px;
 		margin: 0 auto;
 	}
-
+	
 </style>
 </head>
 <body>
