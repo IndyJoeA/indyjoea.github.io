@@ -60,7 +60,7 @@
 			},
 			header: {
 				left: 'prev,next today',
-				center: 'month,agendaCon,agendaDay,listWeek showPayments',
+				center: 'month,agendaCon,agendaDay,listMonth showPayments',
 				right: 'title'
 			},
 			minTime: '07:00:00',
@@ -80,7 +80,7 @@
 			editable: false,
 			eventLimit: false, // allow "more" link when too many events
 			slotEventOverlap: false,
-			eventTextColor: 'black',			
+			eventTextColor: 'black',
 			events: [				
 				//GenConEvents
 			],
@@ -96,7 +96,8 @@
 					if (view.name == "agendaCon" || view.name == "agendaDay") { 
 						eventElement.find("div.fc-content").prepend(userIcons);
 					}
-					if (view.name == "listWeek") { 
+					if (view.name == "listMonth") { 
+						eventElement.find("td.fc-list-item-title").prepend("<img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' width='16' height='16' />&emsp;")
 						eventElement.find("td.fc-list-item-title").append("&emsp;");
 						eventElement.find("td.fc-list-item-title").append(userIcons);
 					}
@@ -106,7 +107,7 @@
 				eventElement.qtip({
 					content: {
 						title: event.title,
-						text: "<p><b>Location:</b> " + event.location + "<br /><b>Start Time:</b> " + moment(event.start).format("h:mm A") + "<br /><b>End Time:</b> " + moment(event.end).format("h:mm A") + "<br /><b>Who's Attending:</b> " + event.users.replace(/,/g, ", ") + "</p><p><a href='" + event.link + "'>Full Event Info</a></p>"
+						text: "<p><b>Location:</b> " + event.location + "<br /><b>Start Time:</b> " + moment(event.start).format("h:mm A") + "<br /><b>End Time:</b> " + moment(event.end).format("h:mm A") + "<br /><b>Who's Attending:</b> " + event.users.replace(/,/g, ", ") + "</p><p><div style='float:left'><img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' title='" + event.type + "' width='32' height='32' /></div><div style='float:right'><a target='_blank' href='" + event.link + "'>Full Event Info</a></div></p>"
 					},
 					show: {
 						delay: 500
