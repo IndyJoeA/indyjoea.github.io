@@ -5,44 +5,14 @@
 <link href='jquery.qtip.min.css' rel='stylesheet' />
 <link href='fullcalendar.min.css' rel='stylesheet' />
 <link href='fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<link href="jAlert.css" rel="stylesheet" />
 <script src='lib/moment.min.js'></script>
 <script src='lib/jquery.min.js'></script>
 <script src='jquery.qtip.min.js'></script>
 <script src='fullcalendar.min.js'></script>
+<script src="jAlert.min.js"></script>
+<script src='jAlert-functions.min.js'></script>
 <script>
-
-	// Alert/Confirm/Prompt
-	function dialogue(content, title) {
-		$('<div />').qtip({
-			content: {
-				text: content,
-				title: title
-			},
-			position: {
-				my: 'center', at: 'center',
-				target: $(window)
-			},
-			show: {
-				ready: true,
-				modal: {
-					on: true,
-					blur: false
-				}
-			},
-			hide: false,
-			style: {
-				classes: 'qtip-bootstrap'
-			},
-			events: {
-				render: function(event, api) {
-					$('button', api.elements.content).click(function(e) {
-						api.hide(e);
-					});
-				},
-				hide: function(event, api) { api.destroy(); }
-			}
-		});
-	}
 
 	$(document).ready(function() {
 				
@@ -51,10 +21,7 @@
 				showPayments: {
 					text: 'show payments',
 					click: function() {
-						var message = $('<table style="padding-top:10px; padding-bottom:20px; width:200px"><thead><tr><th><th style="width:10%"></tr></thead><tbody><tr><th scope="row">Marlena pays Joe</th><td>$4</td></tr><tr><th scope="row">Helen pays Joe</th><td>$6</td></tr><tr><th scope="row">Helen pays Marlena</th><td>$2</td></tr><tr><th scope="row">Charles pays Joe</th><td>$10</td></tr><tr><th scope="row">Charles pays Marlena</th><td>$24</td></tr><tr><th scope="row">Amanda pays Joe</th><td>$4</td></tr><tr><th scope="row">Amanda pays Marlena</th><td>$38</td></tr><tr><th scope="row">Nathan pays Joe</th><td>$4</td></tr><tr><th scope="row">Nathan pays Marlena</th><td>$38</td></tr><tr><th scope="row">Joshua pays Joe</th><td>$6</td></tr><tr><th scope="row">Joshua pays Marlena</th><td>$46</td></tr><tr><th scope="row">Jeff pays Joe</th><td>$10</td></tr><tr><th scope="row">Jeff pays Marlena</th><td>$40</td></tr></tbody></table>'), 
-						ok = $('<button />', { text: 'Ok', class: 'fc fc-button fc-state-default fc-corner-left fc-corner-right', style: 'height:2.1em' });						
-
-						dialogue( message.add(ok), 'Payment Details' );
+						infoAlert('Payment Details', '<table style="font-size:medium; padding-top:10px; padding-bottom:20px; width:100%"><thead><tr><th><th style="width:10%"></tr></thead><tbody><tr><th scope="row">Marlena pays Joe</th><td>$4</td></tr><tr><th scope="row">Helen pays Joe</th><td>$6</td></tr><tr><th scope="row">Helen pays Marlena</th><td>$2</td></tr><tr><th scope="row">Charles pays Joe</th><td>$10</td></tr><tr><th scope="row">Marlena pays Charles</th><td>$4</td></tr><tr><th scope="row">Amanda pays Joe</th><td>$4</td></tr><tr><th scope="row">Amanda pays Charles</th><td>$28</td></tr><tr><th scope="row">Amanda pays Marlena</th><td>$10</td></tr><tr><th scope="row">Nathan pays Joe</th><td>$4</td></tr><tr><th scope="row">Nathan pays Charles</th><td>$28</td></tr><tr><th scope="row">Nathan pays Marlena</th><td>$10</td></tr><tr><th scope="row">Joshua pays Joe</th><td>$6</td></tr><tr><th scope="row">Joshua pays Charles</th><td>$28</td></tr><tr><th scope="row">Joshua pays Marlena</th><td>$18</td></tr><tr><th scope="row">Jeff pays Joe</th><td>$10</td></tr><tr><th scope="row">Jeff pays Charles</th><td>$28</td></tr><tr><th scope="row">Jeff pays Marlena</th><td>$12</td></tr></tbody></table>');
 					}
 				}
 			},
@@ -75,6 +42,8 @@
 					buttonText: 'week'
 				}
 			},
+			listDayFormat: 'dddd',
+			listDayAltFormat: 'MMMM D, YYYY',
 			allDaySlot: false, // all day slot displayed at top
 			navLinks: true, // can click day/week names to navigate views
 			editable: false,
@@ -82,7 +51,7 @@
 			slotEventOverlap: false,
 			eventTextColor: 'black',
 			events: [				
-				{title: 'The Creature from Wakulla Springs!',location: 'JW :: 201 :: 6',type: 'RPG',users: 'Joshua,Jeff,Charles,Amanda,Nathan,Marlena',start: '2017-08-17T11:00:00',end: '2017-08-17T14:30:00', link: 'https://www.gencon.com/events/122648', backgroundColor: '#8DB6C7'},{title: 'The Stone Tree Incident',location: 'JW :: 313 :: 1',type: 'RPG',users: 'Joe,Helen,Charles,Jeff',start: '2017-08-17T15:00:00',end: '2017-08-17T19:00:00', link: 'https://www.gencon.com/events/111587', backgroundColor: '#8DB6C7'},{title: 'Pandemic',location: 'ICC :: Hall D : Rogue Judges :: HQ',type: 'BGM',users: 'Joe,Helen,Charles,Marlena,Joshua,Jeff',start: '2017-08-18T10:00:00',end: '2017-08-18T12:00:00', link: 'https://www.gencon.com/events/106362', backgroundColor: '#C1B38E'},{title: 'Power',location: 'JW :: 313 :: 3',type: 'RPG',users: 'Nathan,Amanda,Charles,Marlena,Joshua,Jeff',start: '2017-08-18T14:00:00',end: '2017-08-18T18:00:00', link: 'https://www.gencon.com/events/112938', backgroundColor: '#8DB6C7'},{title: '4 the Birds',location: 'ICC :: Hall D : Breaking :: HQ',type: 'BGM',users: 'Joe,Helen,Charles,Amanda,Nathan,Marlena,extra,Joshua',start: '2017-08-19T10:00:00',end: '2017-08-19T12:00:00', link: 'https://www.gencon.com/events/114104', backgroundColor: '#C1B38E'},{title: 'Mammoth Star Trek Catan: Federation Space',location: 'ICC :: Hall E : Catan Studios :: HQ',type: 'BGM',users: 'Joe',start: '2017-08-20T10:00:00',end: '2017-08-20T12:00:00', link: 'https://www.gencon.com/events/110066', backgroundColor: '#C1B38E'},{title: 'The Sword of Zaldor: A Fantasy Escape Room',location: 'ICC :: 120',type: 'ZED',users: 'Jeff,Amanda,Nathan,Marlena,Joshua',start: '2017-08-17T09:00:00',end: '2017-08-17T10:00:00', link: 'https://www.gencon.com/events/106579', backgroundColor: '#B2E289'},{title: 'The Board is Turned',location: 'Crowne Plaza :: Illinois St Blrm West',type: 'LRP',users: 'Charles,Marlena,extra,Joshua',start: '2017-08-18T19:00:00',end: '2017-08-19T01:00:00', link: 'https://www.gencon.com/events/106590', backgroundColor: '#CA9F92'},{title: 'A Climax of Painful Secrets',location: 'JW :: White River Blrm H :: 5',type: 'RPG',users: 'Charles,Marlena,Joshua,Jeff',start: '2017-08-19T19:00:00',end: '2017-08-19T23:00:00', link: 'https://www.gencon.com/events/123009', backgroundColor: '#8DB6C7'},{title: 'Promised Sands: Dry Denizen Explorers',location: 'JW :: 313 :: 3',type: 'RPG',users: 'Amanda,Nathan,Marlena,Joshua',start: '2017-08-17T15:00:00',end: '2017-08-17T19:00:00', link: 'https://www.gencon.com/events/110880', backgroundColor: '#8DB6C7'},{title: 'Lockdown',location: 'Omni :: Fisher Blrm',type: 'LRP',users: 'Marlena',start: '2017-08-17T19:00:00',end: '2017-08-17T23:00:00', link: 'https://www.gencon.com/events/103593', backgroundColor: '#CA9F92'},{title: 'Past is Prologue',location: 'Crowne Plaza :: Illinois St Blrm West',type: 'LRP',users: 'Marlena',start: '2017-08-19T12:00:00',end: '2017-08-19T18:00:00', link: 'https://www.gencon.com/events/106591', backgroundColor: '#CA9F92'},{title: 'UH.AQ.12.02 Araqunidia Cameo: Knight in Centropolis',location: 'Union Station :: Edison North :: 8--9',type: 'RPG',users: 'Joshua',start: '2017-08-16T19:00:00',end: '2017-08-16T23:00:00', link: 'https://www.gencon.com/events/104454', backgroundColor: '#8DB6C7'},{title: 'The Void Contract',location: 'JW :: 204 :: 3',type: 'RPG',users: 'Joshua',start: '2017-08-19T14:00:00',end: '2017-08-19T18:00:00', link: 'https://www.gencon.com/events/106194', backgroundColor: '#8DB6C7'},{title: 'Dancing Among Stones (puzzle-oriented)',location: 'Lucas Oil :: Exhibit Hall 2 :: HQ',type: 'TDA',users: 'Julie,Joe,Helen,extra,extra',start: '2017-08-17T09:27:00',end: '2017-08-17T11:27:00', link: 'https://www.gencon.com/events/118357', backgroundColor: '#B1C27A'}
+				{title: 'The Creature from Wakulla Springs!',location: 'JW :: 201 :: 6',type: 'RPG',users: 'Joshua,Jeff,Charles,Amanda,Nathan,Marlena',start: '2017-08-17T11:00:00',end: '2017-08-17T14:30:00', link: 'https://www.gencon.com/events/122648', backgroundColor: '#8DB6C7'},{title: 'The Stone Tree Incident',location: 'JW :: 313 :: 1',type: 'RPG',users: 'Joe,Helen,Charles,Jeff',start: '2017-08-17T15:00:00',end: '2017-08-17T19:00:00', link: 'https://www.gencon.com/events/111587', backgroundColor: '#8DB6C7'},{title: 'Pandemic',location: 'ICC :: Hall D : Rogue Judges :: HQ',type: 'BGM',users: 'Joe,Helen,Charles,Marlena,Joshua,Jeff',start: '2017-08-18T10:00:00',end: '2017-08-18T12:00:00', link: 'https://www.gencon.com/events/106362', backgroundColor: '#C1B38E'},{title: 'Power',location: 'JW :: 313 :: 3',type: 'RPG',users: 'Nathan,Amanda,Charles,Marlena,Joshua,Jeff',start: '2017-08-18T14:00:00',end: '2017-08-18T18:00:00', link: 'https://www.gencon.com/events/112938', backgroundColor: '#8DB6C7'},{title: '4 the Birds',location: 'ICC :: Hall D : Breaking :: HQ',type: 'BGM',users: 'Joe,Helen,Charles,Amanda,Nathan,Marlena,extra,Joshua',start: '2017-08-19T10:00:00',end: '2017-08-19T12:00:00', link: 'https://www.gencon.com/events/114104', backgroundColor: '#C1B38E'},{title: 'Mammoth Star Trek Catan: Federation Space',location: 'ICC :: Hall E : Catan Studios :: HQ',type: 'BGM',users: 'Joe',start: '2017-08-20T10:00:00',end: '2017-08-20T12:00:00', link: 'https://www.gencon.com/events/110066', backgroundColor: '#C1B38E'},{title: 'The Sword of Zaldor: A Fantasy Escape Room',location: 'ICC :: 120',type: 'ZED',users: 'Jeff,Amanda,Nathan,Marlena,Joshua',start: '2017-08-17T09:00:00',end: '2017-08-17T10:00:00', link: 'https://www.gencon.com/events/106579', backgroundColor: '#B2E289'},{title: 'The Board is Turned',location: 'Union Station :: Edison South',type: 'LRP',users: 'Charles,Marlena,extra,Joshua',start: '2017-08-18T19:00:00',end: '2017-08-19T01:00:00', link: 'https://www.gencon.com/events/106590', backgroundColor: '#CA9F92'},{title: 'A Climax of Painful Secrets',location: 'JW :: White River Blrm H :: 5',type: 'RPG',users: 'Charles,Marlena,Joshua,Jeff',start: '2017-08-19T19:00:00',end: '2017-08-19T23:00:00', link: 'https://www.gencon.com/events/123009', backgroundColor: '#8DB6C7'},{title: 'Promised Sands: Dry Denizen Explorers',location: 'JW :: 313 :: 3',type: 'RPG',users: 'Amanda,Nathan,Marlena,Joshua',start: '2017-08-17T15:00:00',end: '2017-08-17T19:00:00', link: 'https://www.gencon.com/events/110880', backgroundColor: '#8DB6C7'},{title: 'Lockdown',location: 'Omni :: Fisher Blrm',type: 'LRP',users: 'Marlena',start: '2017-08-17T19:00:00',end: '2017-08-17T23:00:00', link: 'https://www.gencon.com/events/103593', backgroundColor: '#CA9F92'},{title: 'Past is Prologue',location: 'Crowne Plaza :: Illinois St Blrm West',type: 'LRP',users: 'Marlena',start: '2017-08-19T12:00:00',end: '2017-08-19T18:00:00', link: 'https://www.gencon.com/events/106591', backgroundColor: '#CA9F92'},{title: 'UH.AQ.12.02 Araqunidia Cameo: Knight in Centropolis',location: 'Union Station :: Edison North :: 8--9',type: 'RPG',users: 'Joshua',start: '2017-08-16T19:00:00',end: '2017-08-16T23:00:00', link: 'https://www.gencon.com/events/104454', backgroundColor: '#8DB6C7'},{title: 'The Void Contract',location: 'JW :: 204 :: 3',type: 'RPG',users: 'Joshua',start: '2017-08-19T14:00:00',end: '2017-08-19T18:00:00', link: 'https://www.gencon.com/events/106194', backgroundColor: '#8DB6C7'},{title: 'Dancing Among Stones (puzzle-oriented)',location: 'Lucas Oil :: Exhibit Hall 2 :: HQ',type: 'TDA',users: 'Julie,Joe,Helen,extra,extra',start: '2017-08-17T09:27:00',end: '2017-08-17T11:27:00', link: 'https://www.gencon.com/events/118357', backgroundColor: '#B1C27A'}
 			],
 			eventRender: function(event, eventElement, view) {
 				if (event.users) {
@@ -97,7 +66,8 @@
 						eventElement.find("div.fc-content").prepend(userIcons);
 					}
 					if (view.name == "listMonth") { 
-						eventElement.find("td.fc-list-item-title").prepend("<img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' width='16' height='16' />&emsp;")
+						eventElement.find("td.fc-list-item-marker").remove();
+						eventElement.find("td.fc-list-item-title").prepend("<img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' width='16' height='16' />&emsp;");
 						eventElement.find("td.fc-list-item-title").append("&emsp;");
 						eventElement.find("td.fc-list-item-title").append(userIcons);
 					}

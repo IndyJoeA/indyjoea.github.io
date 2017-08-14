@@ -5,44 +5,14 @@
 <link href='jquery.qtip.min.css' rel='stylesheet' />
 <link href='fullcalendar.min.css' rel='stylesheet' />
 <link href='fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<link href="jAlert.css" rel="stylesheet" />
 <script src='lib/moment.min.js'></script>
 <script src='lib/jquery.min.js'></script>
 <script src='jquery.qtip.min.js'></script>
 <script src='fullcalendar.min.js'></script>
+<script src="jAlert.min.js"></script>
+<script src='jAlert-functions.min.js'></script>
 <script>
-
-	// Alert/Confirm/Prompt
-	function dialogue(content, title) {
-		$('<div />').qtip({
-			content: {
-				text: content,
-				title: title
-			},
-			position: {
-				my: 'center', at: 'center',
-				target: $(window)
-			},
-			show: {
-				ready: true,
-				modal: {
-					on: true,
-					blur: false
-				}
-			},
-			hide: false,
-			style: {
-				classes: 'qtip-bootstrap'
-			},
-			events: {
-				render: function(event, api) {
-					$('button', api.elements.content).click(function(e) {
-						api.hide(e);
-					});
-				},
-				hide: function(event, api) { api.destroy(); }
-			}
-		});
-	}
 
 	$(document).ready(function() {
 				
@@ -51,10 +21,7 @@
 				showPayments: {
 					text: 'show payments',
 					click: function() {
-						var message = $('GenConPayments'), 
-						ok = $('<button />', { text: 'Ok', class: 'fc fc-button fc-state-default fc-corner-left fc-corner-right', style: 'height:2.1em' });						
-
-						dialogue( message.add(ok), 'Payment Details' );
+						infoAlert('Payment Details', 'GenConPayments');
 					}
 				}
 			},
@@ -75,6 +42,8 @@
 					buttonText: 'week'
 				}
 			},
+			listDayFormat: 'dddd',
+			listDayAltFormat: 'MMMM D, YYYY',
 			allDaySlot: false, // all day slot displayed at top
 			navLinks: true, // can click day/week names to navigate views
 			editable: false,
@@ -97,7 +66,8 @@
 						eventElement.find("div.fc-content").prepend(userIcons);
 					}
 					if (view.name == "listMonth") { 
-						eventElement.find("td.fc-list-item-title").prepend("<img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' width='16' height='16' />&emsp;")
+						eventElement.find("td.fc-list-item-marker").remove();
+						eventElement.find("td.fc-list-item-title").prepend("<img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' width='16' height='16' />&emsp;");
 						eventElement.find("td.fc-list-item-title").append("&emsp;");
 						eventElement.find("td.fc-list-item-title").append(userIcons);
 					}
