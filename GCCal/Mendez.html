@@ -20,7 +20,9 @@
 <script>
 
 	$(document).ready(function() {
-				
+
+		var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+	
 		$('#calendar').fullCalendar({
 			customButtons: {
 				showPayments: {
@@ -93,16 +95,25 @@
 						title: event.title,
 						text: "<p><b>Location:</b> " + event.location + "<br /><b>Start Time:</b> " + moment(event.start).format("h:mm A") + "<br /><b>End Time:</b> " + moment(event.end).format("h:mm A") + "<br /><b>Who's Attending:</b> " + event.users.replace(/,/g, ", ") + "</p><p><div style='float:left'><img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' title='" + event.type + "' width='32' height='32' /></div><div style='float:right'><a target='_blank' href='" + event.link + "'>Full Event Info</a></div></p>"
 					},
+					show: (!isMobile ? { 
+						delay: 500 
+					} : {
+					}),
 					hide: {
 						fixed: true
 					},
-					position: {
+					position: (!isMobile ? {						
+						target: 'mouse',
+						adjust: {
+							mouse: false
+						}
+					} : {
 						my: 'top left',
 						at: 'top left',
 						adjust: {
 							mouse: false
 						}
-					},
+					}),
 					style: {
 						classes: 'qtip-bootstrap'
 					}
