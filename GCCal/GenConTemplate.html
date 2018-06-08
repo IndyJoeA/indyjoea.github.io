@@ -49,7 +49,7 @@
 			minTime: '07:00:00',
 			maxTime: '026:00:00',
 			contentHeight: 'auto',
-			defaultDate: '2017-08-17',
+			defaultDate: '2018-08-02',
 			defaultView: 'agendaCon',			
 			views: {
 				agendaCon: {
@@ -70,6 +70,17 @@
 				//GenConEvents
 			],
 			eventRender: function(event, eventElement, view) {
+				var eventHTML = "<p><b>Location:</b> ";
+				if (event.map) {
+					eventHTML += "<a target='_blank' href='" + event.map + "'>" + event.location + "</a><br />";
+				} else {
+					eventHTML += event.location + "<br />";
+				}
+				if (event.floor) {
+					eventHTML += "<b>Floor:</b> " + event.floor + "<br />";
+				}
+				eventHTML += "<b>Time:</b> " + moment(event.start).format("h:mm A") + " to " + moment(event.end).format("h:mm A") + "<br /><b>Who's Attending:</b> " + event.users.replace(/,/g, ", ") + "</p><p><div style='float:left'><img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' title='" + event.type + "' width='32' height='32' /></div><div style='float:right'><a target='_blank' href='" + event.link + "'>Full Event Info</a></div></p>";
+				
 				if (event.users) {
 					var userImages = event.users.split(",");					
 					var userIcons = "";
@@ -93,7 +104,7 @@
 				eventElement.qtip({
 					content: {
 						title: event.title,
-						text: "<p><b>Location:</b> " + event.location + "<br /><b>Start Time:</b> " + moment(event.start).format("h:mm A") + "<br /><b>End Time:</b> " + moment(event.end).format("h:mm A") + "<br /><b>Who's Attending:</b> " + event.users.replace(/,/g, ", ") + "</p><p><div style='float:left'><img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' title='" + event.type + "' width='32' height='32' /></div><div style='float:right'><a target='_blank' href='" + event.link + "'>Full Event Info</a></div></p>"
+						text: eventHTML
 					},
 					show: (!isMobile ? { 
 						delay: 500 
