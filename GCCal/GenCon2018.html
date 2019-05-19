@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+
+<link href='jquery.qtip.min.css' rel='stylesheet' />
+<link href='fullcalendar.min.css' rel='stylesheet' />
+<link href='fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<link href="jAlert.css" rel="stylesheet" />
+<script src='lib/moment.min.js'></script>
+<script src='lib/jquery.min.js'></script>
+<script src='jquery.qtip.min.js'></script>
+<script src='fullcalendar.min.js'></script>
+<script src="jAlert.min.js"></script>
+<script>
+
+	$(document).ready(function() {
+
+		var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+	
+		$('#calendar').fullCalendar({
+			customButtons: {
+				showPayments: {
+					text: 'show payments',
+					click: function() {
+						$.jAlert({
+						  'title': 'Payment Details',
+						  'content': '<table style="font-size:medium; padding-top:10px; padding-bottom:20px; width:100%"><thead><tr><th><th style="width:20%"></tr></thead><tbody><tr><th scope="row">Helen pays Joe</th><td>$68</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Charles pays Joe</th><td style="color: lightgray;text-decoration: line-through">$68</td></tr><tr><th scope="row">Charles pays Nathan</th><td>$4</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Charles pays Marlena</th><td style="color: lightgray;text-decoration: line-through">$7</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Charles pays Joshua</th><td style="color: lightgray;text-decoration: line-through">$314</td></tr><tr><th scope="row">Amanda pays Joe</th><td>$10</td></tr><tr><th scope="row">Amanda pays Nathan</th><td>$4</td></tr><tr><th scope="row">Nathan pays Joe</th><td>$64</td></tr><tr><th scope="row">Nathan pays Marlena</th><td>$18</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Marlena pays Joe</th><td style="color: lightgray;text-decoration: line-through">$56</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Marlena pays Joshua</th><td style="color: lightgray;text-decoration: line-through">$308</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Joshua pays Joe</th><td style="color: lightgray;text-decoration: line-through">$66</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Jeff pays Joe</th><td style="color: lightgray;text-decoration: line-through">$73</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Jeff pays Marlena</th><td style="color: lightgray;text-decoration: line-through">$18</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Jeff pays Joshua</th><td style="color: lightgray;text-decoration: line-through">$339</td></tr><tr><th scope="row" style="color: lightgray;text-decoration: line-through">Jeff pays Charles</th><td style="color: lightgray;text-decoration: line-through">$4</td></tr><tr><th scope="row">Dann pays Joe</th><td>$34</td></tr><tr><th scope="row">Dann pays Charles</th><td>$11</td></tr></tbody></table>',
+						  'closeBtn': false,
+						  'theme': 'blue',
+						  'size': 'sm',
+						  'btns': { 'text': 'Close' },
+						  'showAnimation': 'fadeInDown',
+						  'hideAnimation': 'fadeOutUp'
+						});
+					}
+				}
+			},
+			header: {
+				left: 'prev,next today',
+				center: 'month,agendaCon,agendaDay,listMonth showPayments',
+				right: 'title'
+			},
+			minTime: '07:00:00',
+			maxTime: '026:00:00',
+			contentHeight: 'auto',
+			defaultDate: '2018-08-02',
+			defaultView: 'agendaCon',			
+			views: {
+				agendaCon: {
+					type: 'agenda',
+					dayCount: 4,
+					buttonText: 'week'
+				}
+			},
+			listDayFormat: 'dddd',
+			listDayAltFormat: 'MMMM D, YYYY',
+			allDaySlot: false, // all day slot displayed at top
+			navLinks: true, // can click day/week names to navigate views
+			editable: false,
+			eventLimit: false, // allow "more" link when too many events
+			slotEventOverlap: false,
+			eventTextColor: 'black',
+			events: [				
+				{title: 'Play new Cthulhu Wars Onslaught 3',location: 'ICC :: Hall C : Petersen :: HQ',map: 'https://www.gencon.com/map?lt=-11.092165893502&lg=72.486474609375&z=5&f=1&c=14&s=3697',floor: '1',type: 'BGM',users: 'Joe,Helen,Amanda,Nathan',start: '2018-08-02T10:00:00.000-04:00',end: '2018-08-02T12:00:00.000-04:00', link: 'https://www.gencon.com/events/140380', backgroundColor: '#C1B38E'},{title: 'Idle Hands',location: 'ICC :: 105 :: 12',map: 'https://www.gencon.com/map?lt=-35.5179200717705&lg=14.65576171875&z=4&f=1&c=14&s=1150',floor: '1',type: 'RPG',users: 'Joe,Helen,Charles,Marlena,Joshua,Jeff',start: '2018-08-02T14:00:00.000-04:00',end: '2018-08-02T18:00:00.000-04:00', link: 'https://www.gencon.com/events/135278', backgroundColor: '#8DB6C7'},{title: 'The Walking Dead: Walker Challenge',location: 'ICC :: Hall B : Mantic :: HQ',map: 'https://www.gencon.com/map?lt=-28.291070057254466&lg=98.747138671875&z=5&f=1&c=14&s=3762',floor: '1',type: 'NMN',users: 'Joe,Helen,Charles,Amanda,Nathan,Marlena,Joshua,Jeff',start: '2018-08-03T11:00:00.000-04:00',end: '2018-08-03T12:00:00.000-04:00', link: 'https://www.gencon.com/events/131967', backgroundColor: '#7095E1'},{title: 'Deirdre of the Sorrows',location: 'ICC :: 143 :: HQ',map: 'https://www.gencon.com/map?lt=-6.71698278153123&lg=46.318359375&z=4&f=1&c=14&s=1185',floor: '1',type: 'RPG',users: 'Joe,Helen,Charles,Amanda,Nathan,Marlena,Joshua,Jeff',start: '2018-08-03T13:00:00.000-04:00',end: '2018-08-03T17:00:00.000-04:00', link: 'https://www.gencon.com/events/134332', backgroundColor: '#8DB6C7'},{title: 'Ticket to Ride: US',location: 'Lucas Oil :: Field : Train Gamers Association :: HQ',map: 'https://www.gencon.com/map?lt=80.9558087265548&lg=37.875585937500006&z=5&f=1&c=14&s=3767',floor: '1',type: 'BGM',users: 'Joe,Helen,Charles,Amanda,Nathan,Marlena,Joshua,Jeff,Dann',start: '2018-08-04T09:00:00.000-04:00',end: '2018-08-04T11:00:00.000-04:00', link: 'https://www.gencon.com/events/128734', backgroundColor: '#C1B38E'},{title: 'James SA Corey, Author Guest of Honor Q&A',location: 'Westin :: Grand Bllrm V',map: 'https://www.gencon.com/map?lt=-55.4788534633103&lg=48.8671875&z=4&f=2&c=14&s=2706',floor: '2',type: 'WKS',users: 'Joe,extra',start: '2018-08-04T11:00:00.000-04:00',end: '2018-08-04T12:00:00.000-04:00', link: 'https://www.gencon.com/events/141261', backgroundColor: '#C993D4'},{title: 'Escape Room: KGB Interrogation',location: 'Escape Room Indy :: 200 S. Meridian St. :: HQ',map: '',floor: '',type: 'ZED',users: 'Joe,Dann,Helen,Charles,Amanda,Nathan,Marlena,Joshua,Jeff',start: '2018-08-04T14:00:00.000-04:00',end: '2018-08-04T15:00:00.000-04:00', link: 'https://www.gencon.com/events/133065', backgroundColor: '#B2E289'},{title: 'Tactical Laser Tag',location: 'Lucas Oil :: Field : Laser Tag Arena :: HQ',map: 'https://www.gencon.com/map?lt=80.0187928810568&lg=29.310029296875022&z=5&f=1&c=14&s=3769',floor: '1',type: 'ZED',users: 'Joe,Dann,Helen,Charles,Amanda,Nathan,Marlena,Joshua,Jeff',start: '2018-08-04T15:00:00.000-04:00',end: '2018-08-04T16:00:00.000-04:00', link: 'https://www.gencon.com/events/129922', backgroundColor: '#B2E289'},{title: 'Delicate Delegations',location: 'ICC :: 124 :: 9',map: 'https://www.gencon.com/map?lt=-40.299638188006&lg=78.134765625&z=4&f=1&c=14&s=1167',floor: '1',type: 'RPG',users: 'Charles,Marlena,Joshua,Jeff',start: '2018-08-02T10:00:00.000-04:00',end: '2018-08-02T14:00:00.000-04:00', link: 'https://www.gencon.com/events/130788', backgroundColor: '#8DB6C7'},{title: 'A Menagerie Mess!',location: 'ICC :: 245 :: 10',map: 'https://www.gencon.com/map?lt=-6.5816687063477&lg=43.59375&z=4&f=2&c=14&s=1214',floor: '2',type: 'RPG',users: 'Charles,extra,Marlena,Joshua,Jeff',start: '2018-08-03T18:00:00.000-04:00',end: '2018-08-03T22:00:00.000-04:00', link: 'https://www.gencon.com/events/129613', backgroundColor: '#8DB6C7'},{title: 'The Cultist Convention',location: 'Union Station :: Nickel Plate',map: 'https://www.gencon.com/map?lt=48.5166043488675&lg=-60.908203125&z=1&f=1&c=14&s=1420',floor: '1',type: 'LRP',users: 'Charles,Nathan,Marlena,extra,Joshua,Jeff',start: '2018-08-04T18:00:00.000-04:00',end: '2018-08-04T23:00:00.000-04:00', link: 'https://www.gencon.com/events/131070', backgroundColor: '#CA9F92'},{title: 'X-Wing Hunger Games',location: 'Lucas Oil :: Field : Fight in the Skies :: HQ',map: 'https://www.gencon.com/map?lt=79.8080730171574&lg=36.456240234375&z=5&f=1&c=14&s=3771',floor: '1',type: 'NMN',users: 'Charles,Nathan',start: '2018-08-05T10:00:00.000-04:00',end: '2018-08-05T14:00:00.000-04:00', link: 'https://www.gencon.com/events/134007', backgroundColor: '#7095E1'},{title: 'TMNT',location: 'Lucas Oil :: Field : Fight in the Skies :: HQ',map: 'https://www.gencon.com/map?lt=79.8080730171574&lg=36.456240234375&z=5&f=1&c=14&s=3771',floor: '1',type: 'BGM',users: 'Nathan,Amanda',start: '2018-08-02T14:00:00.000-04:00',end: '2018-08-02T18:00:00.000-04:00', link: 'https://www.gencon.com/events/133895', backgroundColor: '#C1B38E'},{title: 'Day One - The Invasion Begins',location: 'Union Station :: Edison North :: 12',map: 'https://www.gencon.com/map?lt=26.7416859390729&lg=-70.11474609375&z=4&f=3&c=14&s=1302',floor: '3',type: 'RPG',users: 'Joshua',start: '2018-08-01T13:00:00.000-04:00',end: '2018-08-01T15:00:00.000-04:00', link: 'https://www.gencon.com/events/144094', backgroundColor: '#8DB6C7'},{title: 'PFS #9-17: Oath of the Overwatched (5-9)',location: 'Union Station :: Nickel Plate :: 4',map: 'https://www.gencon.com/map?lt=48.5166043488675&lg=-60.908203125&z=1&f=1&c=14&s=1420',floor: '1',type: 'RPG',users: 'Joshua',start: '2018-08-01T19:00:00.000-04:00',end: '2018-08-01T23:30:00.000-04:00', link: 'https://www.gencon.com/events/144296', backgroundColor: '#8DB6C7'},{title: 'Engle Matrix: Thunder Hamsters & the Temple of Cheese',location: 'Lucas Oil :: Field : Rogue Judges :: HQ',map: 'https://www.gencon.com/map?lt=81.2302768068545&lg=33.214833984375&z=5&f=1&c=14&s=3766',floor: '1',type: 'RPG',users: 'Joshua',start: '2018-08-03T09:00:00.000-04:00',end: '2018-08-03T11:00:00.000-04:00', link: 'https://www.gencon.com/events/143323', backgroundColor: '#8DB6C7'},{title: 'Be a Hero! Save the Multiverse!',location: 'ICC :: 140--141 :: HQ',map: 'https://www.gencon.com/map?lt=-6.71698278153123&lg=40.89111328125&z=4&f=1&c=14&s=1183',floor: '1',type: 'RPG',users: 'Joshua',start: '2018-08-03T12:00:00.000-04:00',end: '2018-08-03T14:00:00.000-04:00', link: 'https://www.gencon.com/events/141301', backgroundColor: '#8DB6C7'},{title: 'Otherworldly Desires: Heartbeats & Hard Choices',location: 'Crowne Plaza :: Victoria Station C & D :: 6',map: 'https://www.gencon.com/map?lt=51.1242127578269&lg=-20.830078125&z=4&f=1&c=14&s=2667',floor: '1',type: 'RPG',users: 'Joshua',start: '2018-08-03T15:00:00.000-04:00',end: '2018-08-03T17:00:00.000-04:00', link: 'https://www.gencon.com/events/134495', backgroundColor: '#8DB6C7'},{title: 'Crimson Colosseum: The Battle for Nanxian',location: 'ICC :: 120 :: 8',map: 'https://www.gencon.com/map?lt=-40.299638188006&lg=67.5439453125&z=4&f=1&c=14&s=1163',floor: '1',type: 'RPG',users: 'Joshua',start: '2018-08-04T09:00:00.000-04:00',end: '2018-08-04T13:00:00.000-04:00', link: 'https://www.gencon.com/events/129862', backgroundColor: '#8DB6C7'}
+			],
+			eventRender: function(event, eventElement, view) {
+				var eventHTML = "<p><b>Location:</b> ";
+				if (event.map) {
+					eventHTML += "<a target='_blank' href='" + event.map + "'>" + event.location + "</a><br />";
+				} else {
+					eventHTML += event.location + "<br />";
+				}
+				if (event.floor) {
+					eventHTML += "<b>Floor:</b> " + event.floor + "<br />";
+				}
+				eventHTML += "<b>Time:</b> " + moment(event.start).format("h:mm A") + " to " + moment(event.end).format("h:mm A") + "<br /><b>Who's Attending:</b> " + event.users.replace(/,/g, ", ") + "</p><p><div style='float:left'><img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' title='" + event.type + "' width='32' height='32' /></div><div style='float:right'><a target='_blank' href='" + event.link + "'>Full Event Info</a></div></p>";
+				
+				if (event.users) {
+					var userImages = event.users.split(",");					
+					var userIcons = "";
+					
+					for (var img = 0; img < userImages.length ; img++) {
+						userIcons += "<img src='img/" + userImages[img] + ".jpg' alt='" + userImages[img] + "' style='border-radius: 50%' width='16' height='16'>";
+					}
+					
+					if (view.name == "agendaCon" || view.name == "agendaDay") { 
+						eventElement.find("div.fc-content").prepend(userIcons);
+					}
+					if (view.name == "listMonth") { 
+						eventElement.find("td.fc-list-item-marker").remove();
+						eventElement.find("td.fc-list-item-title").prepend("<img src='img/ico/" + event.type + ".gif' alt='" + event.type + "' width='16' height='16' />&emsp;");
+						eventElement.find("td.fc-list-item-title").append("&emsp;");
+						eventElement.find("td.fc-list-item-title").append(userIcons);
+					}
+				}
+				//if (event.location) { eventElement.find('.fc-title').append("<br/><i>" + event.location) + "</i>"; }
+				eventElement.find('.fc-time').hide();
+				eventElement.qtip({
+					content: {
+						title: event.title,
+						text: eventHTML
+					},
+					show: (!isMobile ? { 
+						delay: 500 
+					} : {
+					}),
+					hide: {
+						fixed: true
+					},
+					position: (!isMobile ? {						
+						target: 'mouse',
+						adjust: {
+							mouse: false
+						}
+					} : {
+						my: 'top left',
+						at: 'top left',
+						adjust: {
+							mouse: false
+						}
+					}),
+					style: {
+						classes: 'qtip-bootstrap'
+					}
+				});
+			}			
+		});
+		
+	});
+
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		margin: 0 auto;
+	}
+	
+</style>
+</head>
+<body>
+
+	<div id='calendar'></div>
+
+</body>
+</html>
